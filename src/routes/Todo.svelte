@@ -3,24 +3,78 @@
 	export let todo: { id: number; name: string; completed: boolean };
 
 	const dispatch = createEventDispatcher();
+
+	let editing: boolean = false;
+	let name: string = todo.name;
+
+	function update(updatedTodo: { id?: number; name?: string; completed?: boolean }) {
+		console.log('Todo: ', todo);
+		console.log('updatedTodo: ', updatedTodo);
+		console.log('Combined: ', { ...todo, ...updatedTodo });
+		dispatch('update', { todo: { ...todo, ...updatedTodo } });
+	}
+
+	function onCancel() {
+		name = todo.name;
+		editing = false;
+	}
+
+	function onSave() {
+		update({ name });
+		editing = false;
+	}
+
+	function onRemove() {
+		dispatch('remove', { todo });
+	}
+
+	function onEdit() {
+		editing = true;
+	}
+
+	function onToggle() {
+		update({ completed: !todo.completed });
+	}
 </script>
 
 <div class="stack-small">
-	<div class="c-cb">
-		<input
-			type="checkbox"
-			id="todo-{todo.id}"
-			on:click={() => (todo.completed = !todo.completed)}
-			checked={todo.completed}
-		/>
-		<label for="todo-{todo.id}" class="todo-label">{todo.name}</label>
-	</div>
-	<div class="btn-group">
-		<button type="button" class="btn">
-			Edit <span class="visually-hidden">{todo.name}</span>
-		</button>
-		<button type="button" class="btn btn__danger" on:click={() => dispatch('remove', todo)}>
-			Delete <span class="visually-hidden">{todo.name}</span>
-		</button>
-	</div>
+	{#if editing}
+		<form
+			on:submit|preventDefault={onSave}
+			class="stack-small"
+			on:keydown={(e) => e.key === 'Escape' && onCancel()}
+		>
+			<div class="form-group">
+				<label for="todo-{todo.id}" class="todo-label">New name for '{todo.name}'</label>
+				<input
+					bind:value={name}
+					id="todo-{todo.id}"
+					type="text"
+					autocomplete="off"
+					class="todo-text"
+				/>
+			</div>
+			<div class="btn-group">
+				<button type="button" class="btn todo-cancel" on:click={onCancel}
+					>Cancel<span class="visually-hidden">renaming {todo.name}</span></button
+				>
+				<button type="submit" class="btn btn__primary todo-edit" disabled={!name}
+					>Save<span class="visually-hidden">new name for {todo.name}</span></button
+				>
+			</div>
+		</form>
+	{:else}
+		<div class="c-cb">
+			<input type="checkbox" id="todo-{todo.id}" on:click={onToggle} checked={todo.completed} />
+			<label for="todo-{todo.id}" class="todo-label">{todo.name}</label>
+		</div>
+		<div class="btn-group">
+			<button type="button" class="btn" on:click={onEdit}>
+				Edit <span class="visually-hidden">{todo.name}</span>
+			</button>
+			<button type="button" class="btn btn__danger" on:click={onRemove}>
+				Delete <span class="visually-hidden">{todo.name}</span>
+			</button>
+		</div>
+	{/if}
 </div>

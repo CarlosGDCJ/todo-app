@@ -8,7 +8,6 @@
 	$: completedTodos = todos.filter((t) => t.completed).length;
 
 	let newTodoName = '';
-	$: console.log('newTodoName: ', newTodoName);
 
 	let newTodoId: number;
 	$: {
@@ -18,7 +17,6 @@
 			newTodoId = Math.max(...todos.map((t) => t.id)) + 1;
 		}
 	}
-	$: console.log('newTodoId: ', newTodoId);
 
 	let filter = 'all';
 	function filterTodos(filter: string, todos: { id: number; name: string; completed: boolean }[]) {
@@ -31,6 +29,11 @@
 
 	function removeTodo(todo: { id: number; name: string; completed: boolean }) {
 		todos = todos.filter((t) => t.id !== todo.id);
+	}
+
+	function updateTodo(todo: { id: number; name: string; completed: boolean }) {
+		const i = todos.findIndex((t) => t.id === todo.id);
+		todos[i] = { ...todos[i], ...todo };
 	}
 
 	function addTodo() {
@@ -65,7 +68,11 @@
 	<ul role="list" class="todo-list stack-large" aria-labelledby="list-heading">
 		{#each filterTodos(filter, todos) as todo, i (todo.id)}
 			<li class="todo">
-				<Todo {todo} on:remove={(e) => removeTodo(e.detail)} />
+				<Todo
+					{todo}
+					on:remove={(e) => removeTodo(e.detail.todo)}
+					on:update={(e) => updateTodo(e.detail.todo)}
+				/>
 			</li>
 		{:else}
 			Nothing to do here
