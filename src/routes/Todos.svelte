@@ -1,14 +1,13 @@
 <script lang="ts">
 	import FilterButton from './FilterButton.svelte';
 	import MoreActions from './MoreActions.svelte';
+	import NewTodo from './NewTodo.svelte';
 	import Todo from './Todo.svelte';
 
 	export let todos: { id: number; name: string; completed: boolean }[] = [];
 
 	$: totalTodos = todos.length;
 	$: completedTodos = todos.filter((t) => t.completed).length;
-
-	let newTodoName = '';
 
 	let newTodoId: number;
 	$: {
@@ -37,9 +36,8 @@
 		todos[i] = { ...todos[i], ...todo };
 	}
 
-	function addTodo() {
-		todos = [...todos, { id: newTodoId, name: newTodoName, completed: false }];
-		newTodoName = '';
+	function addTodo(name: string) {
+		todos = [...todos, { id: newTodoId, name, completed: false }];
 	}
 
 	function checkAll(completed: boolean) {
@@ -57,21 +55,7 @@
 
 <!-- Todos.svelte -->
 <div class="todoapp stack-large">
-	<!-- NewTodo -->
-	<form on:submit|preventDefault={addTodo}>
-		<h2 class="label-wrapper">
-			<label for="todo-0" class="label__lg"> What needs to be done? </label>
-		</h2>
-		<input
-			type="text"
-			id="todo-0"
-			autocomplete="off"
-			class="input input__lg"
-			bind:value={newTodoName}
-		/>
-		<button type="submit" disabled="" class="btn btn__primary btn__lg"> Add </button>
-	</form>
-
+	<NewTodo on:addTodo={(e) => addTodo(e.detail.name)} />
 	<FilterButton bind:filter />
 
 	<!-- TodosStatus -->
