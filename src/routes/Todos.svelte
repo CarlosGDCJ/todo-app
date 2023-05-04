@@ -1,5 +1,6 @@
 <script lang="ts">
 	import FilterButton from './FilterButton.svelte';
+	import MoreActions from './MoreActions.svelte';
 	import Todo from './Todo.svelte';
 
 	export let todos: { id: number; name: string; completed: boolean }[] = [];
@@ -39,6 +40,18 @@
 	function addTodo() {
 		todos = [...todos, { id: newTodoId, name: newTodoName, completed: false }];
 		newTodoName = '';
+	}
+
+	function checkAll(completed: boolean) {
+		// console.log('Before: ');
+		// console.log(JSON.parse(JSON.stringify(todos)));
+		todos = todos.map((t) => ({ ...t, completed }));
+		// console.log('After: ');
+		// console.log(JSON.parse(JSON.stringify(todos)));
+	}
+
+	function removeCompletedTodos() {
+		todos = todos.filter((t) => !t.completed);
 	}
 </script>
 
@@ -81,9 +94,9 @@
 
 	<hr />
 
-	<!-- MoreActions -->
-	<div class="btn-group">
-		<button type="button" class="btn btn__primary">Check all</button>
-		<button type="button" class="btn btn__primary">Remove completed</button>
-	</div>
+	<MoreActions
+		{todos}
+		on:checkAll={(e) => checkAll(e.detail.completed)}
+		on:removeCompleted={removeCompletedTodos}
+	/>
 </div>
