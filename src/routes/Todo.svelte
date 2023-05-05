@@ -1,11 +1,13 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
+	import { createEventDispatcher, tick } from 'svelte';
+	import { selectOnFocus } from './actions';
 	export let todo: { id: number; name: string; completed: boolean };
 
 	const dispatch = createEventDispatcher();
 
 	let editing: boolean = false;
 	let name: string = todo.name;
+	let nameEl: HTMLInputElement;
 
 	function update(updatedTodo: { id?: number; name?: string; completed?: boolean }) {
 		console.log('Todo: ', todo);
@@ -28,8 +30,10 @@
 		dispatch('remove', { todo });
 	}
 
-	function onEdit() {
+	async function onEdit() {
 		editing = true;
+		await tick();
+		nameEl.focus();
 	}
 
 	function onToggle() {
@@ -48,6 +52,8 @@
 				<label for="todo-{todo.id}" class="todo-label">New name for '{todo.name}'</label>
 				<input
 					bind:value={name}
+					bind:this={nameEl}
+					use:selectOnFocus
 					id="todo-{todo.id}"
 					type="text"
 					autocomplete="off"

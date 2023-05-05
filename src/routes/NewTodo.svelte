@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { createEventDispatcher, onMount } from 'svelte';
+	import { selectOnFocus } from './actions';
 
 	const dispatch = createEventDispatcher();
 
@@ -28,12 +29,13 @@
 		<label for="todo-0" class="label__lg"> What needs to be done? </label>
 	</h2>
 	<input
+		bind:value={name}
+		bind:this={nameEl}
+		use:selectOnFocus
 		type="text"
 		id="todo-0"
 		autocomplete="off"
 		class="input input__lg"
-		bind:value={name}
-		bind:this={nameEl}
 	/>
 	<button type="submit" disabled={!name} class="btn btn__primary btn__lg"> Add </button>
 </form>
