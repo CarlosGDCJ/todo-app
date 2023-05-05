@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { createEventDispatcher, onMount } from 'svelte';
-	import { selectOnFocus, focusOnInit } from './actions';
+	import { selectOnFocus, focusOnInit } from '$lib/actions';
 
 	const dispatch = createEventDispatcher();
 

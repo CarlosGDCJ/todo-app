@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { createEventDispatcher, tick } from 'svelte';
-	import { focusOnInit, selectOnFocus } from './actions';
+	import { focusOnInit, selectOnFocus } from '$lib/actions';
 	export let todo: { id: number; name: string; completed: boolean };
 
 	const dispatch = createEventDispatcher();
@@ -40,7 +40,7 @@
 		update({ completed: !todo.completed });
 	}
 
-	function focusEditButton(node) {
+	function focusEditButton(node: HTMLButtonElement) {
 		if (editButtonPressed) {
 			node.focus();
 		}

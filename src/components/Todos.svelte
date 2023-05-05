@@ -5,6 +5,7 @@
 	import NewTodo from './NewTodo.svelte';
 	import Todo from './Todo.svelte';
 	import TodosStatus from './TodosStatus.svelte';
+	import { alert } from '$lib/stores';
 
 	export let todos: { id: number; name: string; completed: boolean }[] = [];
 
@@ -20,6 +21,15 @@
 	let todosStatus: SvelteComponent;
 
 	let filter = 'all';
+	$: {
+		if (filter === 'all') {
+			$alert = 'Browsing all todos';
+		} else if (filter === 'active') {
+			$alert = 'Browsing active todos';
+		} else if (filter === 'completed') {
+			$alert = 'Browsing completed todos';
+		}
+	}
 	function filterTodos(filter: string, todos: { id: number; name: string; completed: boolean }[]) {
 		return filter === 'active'
 			? todos.filter((t) => !t.completed)
@@ -30,28 +40,38 @@
 
 	function removeTodo(todo: { id: number; name: string; completed: boolean }) {
 		todos = todos.filter((t) => t.id !== todo.id);
+		$alert = `Todo named '${todo.name}' has been deleted`;
 		todosStatus.focus();
 	}
 
 	function updateTodo(todo: { id: number; name: string; completed: boolean }) {
 		const i = todos.findIndex((t) => t.id === todo.id);
+
+		if (todos[i].name !== todo.name) $alert = `Todo '${todos[i].name}' renamed to '${todo.name}'`;
+		if (todos[i].completed !== todo.completed)
+			$alert = `Todo '${todos[i].name}' marked as ${todo.completed ? 'completed' : 'active'}`;
+
 		todos[i] = { ...todos[i], ...todo };
 	}
 
 	function addTodo(name: string) {
 		todos = [...todos, { id: newTodoId, name, completed: false }];
+		$alert = `Todo named '${name}' has been added`;
 	}
 
 	function checkAll(completed: boolean) {
 		// console.log('Before: ');
 		// console.log(JSON.parse(JSON.stringify(todos)));
 		todos = todos.map((t) => ({ ...t, completed }));
+		$alert = `${completed ? 'Checked' : 'Unchecked'} ${todos.length} todos`;
 		// console.log('After: ');
 		// console.log(JSON.parse(JSON.stringify(todos)));
 	}
 
 	function removeCompletedTodos() {
+		let numTodos = todos.length;
 		todos = todos.filter((t) => !t.completed);
+		$alert = `Removed ${numTodos - todos.length} todos`;
 	}
 </script>
 
