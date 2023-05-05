@@ -1,22 +1,23 @@
 <script lang="ts">
+	import type { SvelteComponent } from 'svelte';
 	import FilterButton from './FilterButton.svelte';
 	import MoreActions from './MoreActions.svelte';
 	import NewTodo from './NewTodo.svelte';
 	import Todo from './Todo.svelte';
+	import TodosStatus from './TodosStatus.svelte';
 
 	export let todos: { id: number; name: string; completed: boolean }[] = [];
 
-	$: totalTodos = todos.length;
-	$: completedTodos = todos.filter((t) => t.completed).length;
-
 	let newTodoId: number;
 	$: {
-		if (totalTodos === 0) {
+		if (todos.length === 0) {
 			newTodoId = 1;
 		} else {
 			newTodoId = Math.max(...todos.map((t) => t.id)) + 1;
 		}
 	}
+
+	let todosStatus: SvelteComponent;
 
 	let filter = 'all';
 	function filterTodos(filter: string, todos: { id: number; name: string; completed: boolean }[]) {
@@ -29,6 +30,7 @@
 
 	function removeTodo(todo: { id: number; name: string; completed: boolean }) {
 		todos = todos.filter((t) => t.id !== todo.id);
+		todosStatus.focus();
 	}
 
 	function updateTodo(todo: { id: number; name: string; completed: boolean }) {
@@ -58,8 +60,7 @@
 	<NewTodo on:addTodo={(e) => addTodo(e.detail.name)} />
 	<FilterButton bind:filter />
 
-	<!-- TodosStatus -->
-	<h2 id="list-heading">{completedTodos} out of {totalTodos} items completed</h2>
+	<TodosStatus {todos} bind:this={todosStatus} />
 
 	<!-- Todos -->
 	<ul role="list" class="todo-list stack-large" aria-labelledby="list-heading">
