@@ -1,10 +1,8 @@
 <script lang="ts">
 	import { createEventDispatcher, onMount } from 'svelte';
-	import { selectOnFocus } from './actions';
+	import { selectOnFocus, focusOnInit } from './actions';
 
 	const dispatch = createEventDispatcher();
-
-	export let autofocus = false;
 
 	let name = '';
 	let nameEl: HTMLInputElement;
@@ -19,8 +17,6 @@
 		name = '';
 		nameEl.focus();
 	}
-
-	onMount(() => autofocus && nameEl.focus());
 </script>
 
 <!-- NewTodo -->
@@ -32,6 +28,7 @@
 		bind:value={name}
 		bind:this={nameEl}
 		use:selectOnFocus
+		use:focusOnInit
 		type="text"
 		id="todo-0"
 		autocomplete="off"

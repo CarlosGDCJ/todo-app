@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { createEventDispatcher, tick } from 'svelte';
-	import { selectOnFocus } from './actions';
+	import { focusOnInit, selectOnFocus } from './actions';
 	export let todo: { id: number; name: string; completed: boolean };
 
 	const dispatch = createEventDispatcher();
@@ -8,6 +8,7 @@
 	let editing: boolean = false;
 	let name: string = todo.name;
 	let nameEl: HTMLInputElement;
+	let editButtonPressed = false;
 
 	function update(updatedTodo: { id?: number; name?: string; completed?: boolean }) {
 		console.log('Todo: ', todo);
@@ -30,14 +31,19 @@
 		dispatch('remove', { todo });
 	}
 
-	async function onEdit() {
+	function onEdit() {
+		editButtonPressed = true;
 		editing = true;
-		await tick();
-		nameEl.focus();
 	}
 
 	function onToggle() {
 		update({ completed: !todo.completed });
+	}
+
+	function focusEditButton(node) {
+		if (editButtonPressed) {
+			node.focus();
+		}
 	}
 </script>
 
@@ -54,6 +60,7 @@
 					bind:value={name}
 					bind:this={nameEl}
 					use:selectOnFocus
+					use:focusOnInit
 					id="todo-{todo.id}"
 					type="text"
 					autocomplete="off"
@@ -75,7 +82,7 @@
 			<label for="todo-{todo.id}" class="todo-label">{todo.name}</label>
 		</div>
 		<div class="btn-group">
-			<button type="button" class="btn" on:click={onEdit}>
+			<button type="button" class="btn" on:click={onEdit} use:focusEditButton>
 				Edit <span class="visually-hidden">{todo.name}</span>
 			</button>
 			<button type="button" class="btn btn__danger" on:click={onRemove}>
