@@ -60,18 +60,15 @@
 	}
 
 	function checkAll(completed: boolean) {
-		// console.log('Before: ');
-		// console.log(JSON.parse(JSON.stringify(todos)));
 		todos = todos.map((t) => ({ ...t, completed }));
 		$alert = `${completed ? 'Checked' : 'Unchecked'} ${todos.length} todos`;
-		// console.log('After: ');
-		// console.log(JSON.parse(JSON.stringify(todos)));
 	}
 
 	function removeCompletedTodos() {
 		let numTodos = todos.length;
 		todos = todos.filter((t) => !t.completed);
 		$alert = `Removed ${numTodos - todos.length} todos`;
+		todosStatus.focus();
 	}
 </script>
 
