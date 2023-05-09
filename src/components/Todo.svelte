@@ -11,7 +11,7 @@
 	let nameEl: HTMLInputElement;
 	let editButtonPressed = false;
 
-	function update(updatedTodo: { id?: number; name?: string; completed?: boolean }) {
+	function update(updatedTodo: Partial<TodoType>) {
 		dispatch('update', { todo: { ...todo, ...updatedTodo } });
 	}
 

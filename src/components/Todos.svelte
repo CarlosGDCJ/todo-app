@@ -7,6 +7,7 @@
 	import TodosStatus from './TodosStatus.svelte';
 	import { alert } from '$lib/stores';
 	import type { TodoType } from '../types/todo.type';
+	import { Filter } from '../types/filter.enum';
 
 	export let todos: TodoType[] = [];
 
@@ -21,20 +22,20 @@
 
 	let todosStatus: SvelteComponent;
 
-	let filter = 'all';
+	let filter = Filter.ALL;
 	$: {
-		if (filter === 'all') {
+		if (filter === Filter.ALL) {
 			$alert = 'Browsing all todos';
-		} else if (filter === 'active') {
+		} else if (filter === Filter.ACTIVE) {
 			$alert = 'Browsing active todos';
-		} else if (filter === 'completed') {
+		} else if (filter === Filter.COMPLETED) {
 			$alert = 'Browsing completed todos';
 		}
 	}
 	function filterTodos(filter: string, todos: TodoType[]) {
-		return filter === 'active'
+		return filter === Filter.ACTIVE
 			? todos.filter((t) => !t.completed)
-			: filter === 'completed'
+			: filter === Filter.COMPLETED
 			? todos.filter((t) => t.completed)
 			: todos;
 	}
