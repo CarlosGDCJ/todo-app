@@ -2,8 +2,8 @@ import { writable } from 'svelte/store';
 import { browser } from '$app/environment';
 import type { JsonValue } from '../types/json.type';
 
-export function localStore(key: string, initial: JsonValue) {
-	function toString(value: JsonValue) {
+export function localStore<T extends JsonValue>(key: string, initial: T) {
+	function toString(value: T) {
 		return JSON.stringify(value, null, 2);
 	}
 	const toObj = JSON.parse;
@@ -17,7 +17,7 @@ export function localStore(key: string, initial: JsonValue) {
 
 		return {
 			subscribe,
-			set(value: JsonValue) {
+			set(value: T) {
 				localStorage.setItem(key, toString(value));
 				return set(value);
 			},
