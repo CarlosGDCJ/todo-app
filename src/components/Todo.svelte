@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { createEventDispatcher, tick } from 'svelte';
 	import { focusOnInit, selectOnFocus } from '$lib/actions';
-	export let todo: { id: number; name: string; completed: boolean };
+	import type { TodoType } from '../types/todo.type';
+	export let todo: TodoType;
 
 	const dispatch = createEventDispatcher();
 
@@ -11,9 +12,6 @@
 	let editButtonPressed = false;
 
 	function update(updatedTodo: { id?: number; name?: string; completed?: boolean }) {
-		console.log('Todo: ', todo);
-		console.log('updatedTodo: ', updatedTodo);
-		console.log('Combined: ', { ...todo, ...updatedTodo });
 		dispatch('update', { todo: { ...todo, ...updatedTodo } });
 	}
 

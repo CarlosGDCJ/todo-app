@@ -6,8 +6,9 @@
 	import Todo from './Todo.svelte';
 	import TodosStatus from './TodosStatus.svelte';
 	import { alert } from '$lib/stores';
+	import type { TodoType } from '../types/todo.type';
 
-	export let todos: { id: number; name: string; completed: boolean }[] = [];
+	export let todos: TodoType[] = [];
 
 	let newTodoId: number;
 	$: {
@@ -30,7 +31,7 @@
 			$alert = 'Browsing completed todos';
 		}
 	}
-	function filterTodos(filter: string, todos: { id: number; name: string; completed: boolean }[]) {
+	function filterTodos(filter: string, todos: TodoType[]) {
 		return filter === 'active'
 			? todos.filter((t) => !t.completed)
 			: filter === 'completed'
@@ -38,13 +39,13 @@
 			: todos;
 	}
 
-	function removeTodo(todo: { id: number; name: string; completed: boolean }) {
+	function removeTodo(todo: TodoType) {
 		todos = todos.filter((t) => t.id !== todo.id);
 		$alert = `Todo named '${todo.name}' has been deleted`;
 		todosStatus.focus();
 	}
 
-	function updateTodo(todo: { id: number; name: string; completed: boolean }) {
+	function updateTodo(todo: TodoType) {
 		const i = todos.findIndex((t) => t.id === todo.id);
 
 		if (todos[i].name !== todo.name) $alert = `Todo '${todos[i].name}' renamed to '${todo.name}'`;

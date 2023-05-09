@@ -1,5 +1,6 @@
 <script lang="ts">
-	export let todos: { id: number; name: string; completed: boolean }[];
+	import type { TodoType } from '../types/todo.type';
+	export let todos: TodoType[];
 
 	export function focus() {
 		headingEl.focus();

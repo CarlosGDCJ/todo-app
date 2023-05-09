@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
+	import type { TodoType } from '../types/todo.type';
 
 	const dispatch = createEventDispatcher();
 
-	export let todos: { id: number; name: string; completed: boolean }[];
+	export let todos: TodoType[];
 
 	let completed = true;
 

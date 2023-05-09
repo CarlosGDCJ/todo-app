@@ -1,11 +1,9 @@
 import { writable } from 'svelte/store';
 import { browser } from '$app/environment';
+import type { TodoType } from '../types/todo.type';
 
-export function localStore(
-	key: string,
-	initial: { id: number; name: string; completed: boolean }[]
-) {
-	function toString(value: { id: number; name: string; completed: boolean }[]) {
+export function localStore(key: string, initial: TodoType[]) {
+	function toString(value: TodoType[]) {
 		return JSON.stringify(value, null, 2);
 	}
 	const toObj = JSON.parse;
@@ -19,7 +17,7 @@ export function localStore(
 
 		return {
 			subscribe,
-			set(value: { id: number; name: string; completed: boolean }[]) {
+			set(value: TodoType[]) {
 				localStorage.setItem(key, toString(value));
 				return set(value);
 			},
