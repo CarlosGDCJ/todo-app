@@ -1,6 +1,9 @@
 lockfileVersion: '6.0'
 
 devDependencies:
+  '@skeletonlabs/skeleton':
+    specifier: ^1.5.1
+    version: 1.5.1
   '@sveltejs/adapter-auto':
     specifier: ^2.0.0
     version: 2.0.1(@sveltejs/kit@1.15.10)
@@ -375,6 +378,13 @@ packages:
 
   /@polka/url@1.0.0-next.21:
     resolution: {integrity: sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==}
+    dev: true
+
+  /@skeletonlabs/skeleton@1.5.1:
+    resolution: {integrity: sha512-b5D6vyUgE69XRbe9D3ImqJZHIRzEKwIa4HQik6LckjzgrfgUmTSeZXRdZeCuEVNI+6hdDcgTx4Brg9/8phcEeg==}
+    dependencies:
+      esm-env: 1.0.0
+      svelte: 3.58.0
     dev: true
 
   /@sveltejs/adapter-auto@2.0.1(@sveltejs/kit@1.15.10):
