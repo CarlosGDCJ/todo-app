@@ -9,12 +9,15 @@
 <AppShell>
 	<svelte:fragment slot="header">
 		<AppBar
-			shadow="shadow-x1"
-			gridColumns="grid-cols-2"
-			slotDefault="place-self-end"
+			shadow="shadow-lg"
+			gridColumns="grid-cols-3"
+			slotDefault="place-self-center"
 			slotTrail="place-content-end"
 		>
-			Todo app
+			<svelte:fragment slot="lead">
+				<div />
+			</svelte:fragment>
+			<h3 class="text-lg font-light">TodoApp</h3>
 			<svelte:fragment slot="trail">
 				<LightSwitch rounded="rounded-xl" />
 			</svelte:fragment>

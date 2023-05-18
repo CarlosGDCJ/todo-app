@@ -75,32 +75,34 @@
 </script>
 
 <!-- Todos.svelte -->
-<div class="todoapp stack-large">
-	<NewTodo on:addTodo={(e) => addTodo(e.detail.name)} />
-	<FilterButton bind:filter />
+<div class="flex justify-center">
+	<div class="grid grid-cols-1 gap-4 min-w-full md:min-w-[750px] mt-4">
+		<NewTodo on:addTodo={(e) => addTodo(e.detail.name)} />
+		<FilterButton bind:filter />
 
-	<TodosStatus {todos} bind:this={todosStatus} />
+		<TodosStatus {todos} bind:this={todosStatus} />
 
-	<!-- Todos -->
-	<ul role="list" class="todo-list stack-large" aria-labelledby="list-heading">
-		{#each filterTodos(filter, todos) as todo, i (todo.id)}
-			<li class="todo">
-				<Todo
-					{todo}
-					on:remove={(e) => removeTodo(e.detail.todo)}
-					on:update={(e) => updateTodo(e.detail.todo)}
-				/>
-			</li>
-		{:else}
-			Nothing to do here
-		{/each}
-	</ul>
+		<!-- Todos -->
+		<ul role="list" class="todo-list stack-large" aria-labelledby="list-heading">
+			{#each filterTodos(filter, todos) as todo, i (todo.id)}
+				<li class="todo">
+					<Todo
+						{todo}
+						on:remove={(e) => removeTodo(e.detail.todo)}
+						on:update={(e) => updateTodo(e.detail.todo)}
+					/>
+				</li>
+			{:else}
+				Nothing to do here
+			{/each}
+		</ul>
 
-	<hr />
+		<hr />
 
-	<MoreActions
-		{todos}
-		on:checkAll={(e) => checkAll(e.detail.completed)}
-		on:removeCompleted={removeCompletedTodos}
-	/>
+		<MoreActions
+			{todos}
+			on:checkAll={(e) => checkAll(e.detail.completed)}
+			on:removeCompleted={removeCompletedTodos}
+		/>
+	</div>
 </div>
