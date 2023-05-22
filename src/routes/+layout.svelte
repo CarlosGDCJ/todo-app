@@ -19,7 +19,7 @@
 			</svelte:fragment>
 			<h3 class="text-lg font-light">TodoApp</h3>
 			<svelte:fragment slot="trail">
-				<LightSwitch rounded="rounded-xl" />
+				<LightSwitch />
 			</svelte:fragment>
 		</AppBar>
 	</svelte:fragment>
