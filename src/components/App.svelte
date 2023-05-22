@@ -4,7 +4,7 @@
 	import { todos } from '$lib/stores';
 </script>
 
-<Alert />
+<!-- <Alert /> -->
 <Todos bind:todos={$todos} />
 
 <style>

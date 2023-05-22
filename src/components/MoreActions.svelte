@@ -21,14 +21,17 @@
 </script>
 
 <!-- MoreActions -->
-<div class="btn-group">
-	<button type="button" on:click={onCheckAll} class="btn btn__primary" disabled={todos.length === 0}
-		>{completed ? 'Check' : 'Uncheck'} all</button
+<div class="grid grid-cols-2 mb-2">
+	<button
+		type="button"
+		class="btn variant-filled-secondary col-span-1 mr-1"
+		on:click={onCheckAll}
+		disabled={todos.length === 0}>{completed ? 'Check' : 'Uncheck'} all</button
 	>
 	<button
 		type="button"
+		class="btn variant-filled-secondary col-span-1 ml-1"
 		on:click={onRemoveCompleted}
-		class="btn btn__primary"
 		disabled={completedTodos === 0}>Remove completed</button
 	>
 </div>

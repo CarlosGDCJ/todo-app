@@ -1,38 +1,41 @@
 <script lang="ts">
+	import { RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
 	import { Filter } from '../types/filter.enum';
 	export let filter: Filter = Filter.ALL;
 </script>
 
 <!-- Filter -->
-<div class="filters btn-group stack-exception">
-	<button
-		class="btn toggle-btn"
-		class:btn__primary={filter === Filter.ALL}
-		aria-pressed={filter === Filter.ALL}
-		on:click={() => (filter = Filter.ALL)}
-	>
+<RadioGroup
+	active="variant-filled-secondary"
+	hover="hover:variant-soft-primary"
+	display="flex"
+	spacing="space-x-10 px-2"
+>
+	<RadioItem bind:group={filter} name="all" value={Filter.ALL}>
 		<span class="visually-hidden">Show</span>
 		<span>All</span>
 		<span class="visually-hidden">tasks</span>
-	</button>
-	<button
-		class="btn toggle-btn"
-		class:btn__primary={filter === Filter.ACTIVE}
-		aria-pressed={filter === Filter.ACTIVE}
-		on:click={() => (filter = Filter.ACTIVE)}
-	>
-		<span class="visually-hidden">Show</span>
-		<span>Active</span>
-		<span class="visually-hidden">tasks</span>
-	</button>
-	<button
-		class="btn toggle-btn"
-		class:btn__primary={filter === Filter.COMPLETED}
-		aria-pressed={filter === Filter.COMPLETED}
-		on:click={() => (filter = Filter.COMPLETED)}
-	>
+	</RadioItem>
+	<RadioItem bind:group={filter} name="completed" value={Filter.COMPLETED}>
 		<span class="visually-hidden">Show</span>
 		<span>Completed</span>
 		<span class="visually-hidden">tasks</span>
-	</button>
-</div>
+	</RadioItem>
+	<RadioItem bind:group={filter} name="active" value={Filter.ACTIVE}>
+		<span class="visually-hidden">Show</span>
+		<span>Active</span>
+		<span class="visually-hidden">tasks</span>
+	</RadioItem>
+</RadioGroup>
+
+<style>
+	.visually-hidden {
+		position: absolute !important;
+		height: 1px;
+		width: 1px;
+		overflow: hidden;
+		clip: rect(1px 1px 1px 1px);
+		clip: rect(1px, 1px, 1px, 1px);
+		white-space: nowrap;
+	}
+</style>

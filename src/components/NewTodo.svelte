@@ -21,8 +21,10 @@
 
 <!-- NewTodo -->
 <form on:submit|preventDefault={addTodo} on:keydown={(e) => e.key === 'Escape' && onCancel()}>
-	<h2 class="label-wrapper">
-		<label for="todo-0" class="label__lg"> What needs to be done? </label>
+	<h2 class="m-0 text-center">
+		<label for="todo-0" class="text-2xl font-normal leading-tight mb-4">
+			What needs to be done?
+		</label>
 	</h2>
 	<input
 		bind:value={name}
@@ -32,7 +34,7 @@
 		type="text"
 		id="todo-0"
 		autocomplete="off"
-		class="input input__lg"
+		class="input text-2xl font-normal p-4 mb-4"
 	/>
-	<button type="submit" disabled={!name} class="btn btn__primary btn__lg"> Add </button>
+	<button type="submit" disabled={!name} class="btn variant-filled-primary w-full"> Add </button>
 </form>
