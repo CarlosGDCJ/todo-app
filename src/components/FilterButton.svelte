@@ -6,7 +6,7 @@
 
 <!-- Filter -->
 <RadioGroup
-	active="variant-filled-primary"
+	active="variant-filled-secondary"
 	hover="hover:variant-soft-primary"
 	display="flex"
 	spacing="space-x-10 px-2"

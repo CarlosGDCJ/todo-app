@@ -36,5 +36,5 @@
 		autocomplete="off"
 		class="input text-2xl font-normal p-4 mb-4"
 	/>
-	<button type="submit" disabled={!name} class="btn variant-filled w-full"> Add </button>
+	<button type="submit" disabled={!name} class="btn variant-filled-primary w-full"> Add </button>
 </form>
