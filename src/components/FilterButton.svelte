@@ -5,30 +5,28 @@
 </script>
 
 <!-- Filter -->
-<div class="place-self-center">
-	<RadioGroup
-		active="variant-filled-primary"
-		hover="hover:variant-soft-primary"
-		display="flex"
-		spacing="space-x-6"
-	>
-		<RadioItem bind:group={filter} name="all" value={Filter.ALL}>
-			<span class="visually-hidden">Show</span>
-			<span>All</span>
-			<span class="visually-hidden">tasks</span>
-		</RadioItem>
-		<RadioItem bind:group={filter} name="completed" value={Filter.COMPLETED}>
-			<span class="visually-hidden">Show</span>
-			<span>Completed</span>
-			<span class="visually-hidden">tasks</span>
-		</RadioItem>
-		<RadioItem bind:group={filter} name="active" value={Filter.ACTIVE}>
-			<span class="visually-hidden">Show</span>
-			<span>Active</span>
-			<span class="visually-hidden">tasks</span>
-		</RadioItem>
-	</RadioGroup>
-</div>
+<RadioGroup
+	active="variant-filled-primary"
+	hover="hover:variant-soft-primary"
+	display="flex"
+	spacing="space-x-10 px-2"
+>
+	<RadioItem bind:group={filter} name="all" value={Filter.ALL}>
+		<span class="visually-hidden">Show</span>
+		<span>All</span>
+		<span class="visually-hidden">tasks</span>
+	</RadioItem>
+	<RadioItem bind:group={filter} name="completed" value={Filter.COMPLETED}>
+		<span class="visually-hidden">Show</span>
+		<span>Completed</span>
+		<span class="visually-hidden">tasks</span>
+	</RadioItem>
+	<RadioItem bind:group={filter} name="active" value={Filter.ACTIVE}>
+		<span class="visually-hidden">Show</span>
+		<span>Active</span>
+		<span class="visually-hidden">tasks</span>
+	</RadioItem>
+</RadioGroup>
 
 <style>
 	.visually-hidden {

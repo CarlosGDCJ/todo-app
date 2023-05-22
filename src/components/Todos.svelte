@@ -77,8 +77,12 @@
 <!-- Todos.svelte -->
 <div class="flex justify-center">
 	<div class="grid grid-cols-1 gap-4 min-w-full md:min-w-[750px] mt-4">
-		<NewTodo on:addTodo={(e) => addTodo(e.detail.name)} />
-		<FilterButton bind:filter />
+		<div class="card p-4 w-full text-token">
+			<NewTodo on:addTodo={(e) => addTodo(e.detail.name)} />
+		</div>
+		<div class="place-self-center">
+			<FilterButton bind:filter />
+		</div>
 
 		<TodosStatus {todos} bind:this={todosStatus} />
 
