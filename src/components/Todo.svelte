@@ -77,6 +77,7 @@
 				type="checkbox"
 				id="todo-{todo.id}"
 				on:click={onToggle}
+				on:keydown={(e) => e.key === 'Enter' && onToggle()}
 				checked={todo.completed}
 			/>
 			<label for="todo-{todo.id}" class="label inline-block font-normal text-lg align-middle"
