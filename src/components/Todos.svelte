@@ -88,9 +88,9 @@
 			<TodosStatus {todos} bind:this={todosStatus} />
 
 			<!-- Todos -->
-			<ul role="list" class="todo-list stack-large" aria-labelledby="list-heading">
+			<ul role="list" aria-labelledby="list-heading">
 				{#each filterTodos(filter, todos) as todo, i (todo.id)}
-					<li class="todo">
+					<li>
 						<Todo
 							{todo}
 							on:remove={(e) => removeTodo(e.detail.todo)}
@@ -98,7 +98,7 @@
 						/>
 					</li>
 				{:else}
-					Nothing to do here
+					<p class="text-xl font-normal leading-tight mb-4">Nothing to do here</p>
 				{/each}
 			</ul>
 		</div>
