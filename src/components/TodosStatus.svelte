@@ -13,6 +13,11 @@
 </script>
 
 <!-- TodosStatus -->
-<h2 id="list-heading" bind:this={headingEl} tabindex="-1">
+<h2
+	id="list-heading"
+	class="text-xl font-normal leading-tight mb-4"
+	bind:this={headingEl}
+	tabindex="-1"
+>
 	{completedTodos} out of {totalTodos} items completed
 </h2>

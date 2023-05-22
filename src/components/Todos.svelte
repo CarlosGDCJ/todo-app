@@ -76,37 +76,40 @@
 
 <!-- Todos.svelte -->
 <div class="flex justify-center">
-	<div class="grid grid-cols-1 gap-4 min-w-full md:min-w-[750px] mt-4">
-		<div class="card p-4 w-full text-token">
+	<div class="grid grid-cols-1 gap-1 min-w-full md:min-w-[750px] mt-4">
+		<div class="card p-4 m-2 text-token">
 			<NewTodo on:addTodo={(e) => addTodo(e.detail.name)} />
 		</div>
 		<div class="place-self-center">
 			<FilterButton bind:filter />
 		</div>
 
-		<TodosStatus {todos} bind:this={todosStatus} />
+		<div class="card p-4 m-2">
+			<TodosStatus {todos} bind:this={todosStatus} />
+			<hr />
 
-		<!-- Todos -->
-		<ul role="list" class="todo-list stack-large" aria-labelledby="list-heading">
-			{#each filterTodos(filter, todos) as todo, i (todo.id)}
-				<li class="todo">
-					<Todo
-						{todo}
-						on:remove={(e) => removeTodo(e.detail.todo)}
-						on:update={(e) => updateTodo(e.detail.todo)}
-					/>
-				</li>
-			{:else}
-				Nothing to do here
-			{/each}
-		</ul>
+			<!-- Todos -->
+			<ul role="list" class="todo-list stack-large" aria-labelledby="list-heading">
+				{#each filterTodos(filter, todos) as todo, i (todo.id)}
+					<li class="todo">
+						<Todo
+							{todo}
+							on:remove={(e) => removeTodo(e.detail.todo)}
+							on:update={(e) => updateTodo(e.detail.todo)}
+						/>
+					</li>
+				{:else}
+					Nothing to do here
+				{/each}
+			</ul>
+		</div>
 
-		<hr />
-
-		<MoreActions
-			{todos}
-			on:checkAll={(e) => checkAll(e.detail.completed)}
-			on:removeCompleted={removeCompletedTodos}
-		/>
+		<div class="place-self-center">
+			<MoreActions
+				{todos}
+				on:checkAll={(e) => checkAll(e.detail.completed)}
+				on:removeCompleted={removeCompletedTodos}
+			/>
+		</div>
 	</div>
 </div>
