@@ -75,7 +75,7 @@
 			</div>
 		</form>
 	{:else}
-		<div class="space-x-1 relative">
+		<div class="space-x-1">
 			<input
 				class="checkbox w-[44px] h-[44px]"
 				type="checkbox"
@@ -83,7 +83,9 @@
 				on:click={onToggle}
 				checked={todo.completed}
 			/>
-			<label for="todo-{todo.id}" class="inline-block font-normal text-lg">{todo.name}</label>
+			<label for="todo-{todo.id}" class="inline-block font-normal text-lg align-middle"
+				>{todo.name}</label
+			>
 		</div>
 		<div class="w-full grid grid-cols-2">
 			<button
