@@ -45,7 +45,7 @@
 	}
 </script>
 
-<div class="stack-small">
+<div class="space-y-2 my-4">
 	{#if editing}
 		<form
 			on:submit|preventDefault={onSave}
@@ -53,7 +53,7 @@
 			on:keydown={(e) => e.key === 'Escape' && onCancel()}
 		>
 			<div class="form-group">
-				<label for="todo-{todo.id}" class="todo-label">New name for '{todo.name}'</label>
+				<label for="todo-{todo.id}" class="font-normal text-lg">New name for '{todo.name}:'</label>
 				<input
 					bind:value={name}
 					bind:this={nameEl}
@@ -62,10 +62,10 @@
 					id="todo-{todo.id}"
 					type="text"
 					autocomplete="off"
-					class="todo-text"
+					class="input font-normal my-4"
 				/>
 			</div>
-			<div class="btn-group">
+			<div class="btn-group variant-filled-primary">
 				<button type="button" class="btn todo-cancel" on:click={onCancel}
 					>Cancel<span class="visually-hidden">renaming {todo.name}</span></button
 				>
@@ -75,15 +75,26 @@
 			</div>
 		</form>
 	{:else}
-		<div class="c-cb">
-			<input type="checkbox" id="todo-{todo.id}" on:click={onToggle} checked={todo.completed} />
-			<label for="todo-{todo.id}" class="todo-label">{todo.name}</label>
+		<div class="space-x-1 relative">
+			<input
+				class="checkbox w-[44px] h-[44px]"
+				type="checkbox"
+				id="todo-{todo.id}"
+				on:click={onToggle}
+				checked={todo.completed}
+			/>
+			<label for="todo-{todo.id}" class="inline-block font-normal text-lg">{todo.name}</label>
 		</div>
-		<div class="btn-group">
-			<button type="button" class="btn" on:click={onEdit} use:focusEditButton>
+		<div class="w-full grid grid-cols-2">
+			<button
+				type="button"
+				class="btn variant-filled-primary col-span1 mr-1"
+				on:click={onEdit}
+				use:focusEditButton
+			>
 				Edit <span class="visually-hidden">{todo.name}</span>
 			</button>
-			<button type="button" class="btn btn__danger" on:click={onRemove}>
+			<button type="button" class="btn variant-filled-error col-span-1 ml-1" on:click={onRemove}>
 				Delete <span class="visually-hidden">{todo.name}</span>
 			</button>
 		</div>
