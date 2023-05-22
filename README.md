@@ -1,38 +1,19 @@
-# create-svelte
+# TodoApp
+Todo Application written in Svelte. [Click here to try it out](https://carlosgdcj.github.io/todo-app/).
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+This project is an extenstion of the [MDN Svelte tutorial](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks/Svelte_getting_started).
 
-## Creating a project
+## Functionalities
 
-If you're seeing this, you've probably already done this step. Congrats!
+* Create, Delete and Edit Todos
+* Todos persist through sessions (saved to localStorage)
+* Fully functional using the keyboard only
+* Support to Dark Mode
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+## Screenshots
+![App screenshot with 3 todos](img/TodoAppScreenshot.png)
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+## Tools used
+* Deployed to GitHub Pages using GitHub Actions
+* Written with Svelte + SvelteKit + TypeScript
+* Styled with Skeleton + Tailwind
