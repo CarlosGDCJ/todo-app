@@ -47,11 +47,7 @@
 
 <div class="space-y-2 my-4">
 	{#if editing}
-		<form
-			on:submit|preventDefault={onSave}
-			class="stack-small"
-			on:keydown={(e) => e.key === 'Escape' && onCancel()}
-		>
+		<form on:submit|preventDefault={onSave} on:keydown={(e) => e.key === 'Escape' && onCancel()}>
 			<div class="form-group">
 				<label for="todo-{todo.id}" class="font-normal text-lg">New name for '{todo.name}:'</label>
 				<input
@@ -62,14 +58,14 @@
 					id="todo-{todo.id}"
 					type="text"
 					autocomplete="off"
-					class="input font-normal my-4"
+					class="input font-normal my-2"
 				/>
 			</div>
-			<div class="btn-group variant-filled-primary">
-				<button type="button" class="btn todo-cancel" on:click={onCancel}
+			<div class="w-full grid grid-cols-2">
+				<button type="button" class="btn variant-filled-error mr-1" on:click={onCancel}
 					>Cancel<span class="visually-hidden">renaming {todo.name}</span></button
 				>
-				<button type="submit" class="btn btn__primary todo-edit" disabled={!name}
+				<button type="submit" class="btn variant-filled-success ml-1" disabled={!name}
 					>Save<span class="visually-hidden">new name for {todo.name}</span></button
 				>
 			</div>
@@ -83,7 +79,7 @@
 				on:click={onToggle}
 				checked={todo.completed}
 			/>
-			<label for="todo-{todo.id}" class="inline-block font-normal text-lg align-middle"
+			<label for="todo-{todo.id}" class="label inline-block font-normal text-lg align-middle"
 				>{todo.name}</label
 			>
 		</div>
