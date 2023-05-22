@@ -103,7 +103,7 @@
 			</ul>
 		</div>
 
-		<div class="place-self-center">
+		<div class="w-3/4 place-self-center">
 			<MoreActions
 				{todos}
 				on:checkAll={(e) => checkAll(e.detail.completed)}
